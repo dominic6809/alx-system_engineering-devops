@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# Displays 1-100 with exceptions in multiples of 3,5 or both
+
+for numb in {1..100}
+do
+  if (( numb % 3 == 0 && numb % 5 == 0 ))
+  then
+    echo "FizzBuzz"
+  elif (( numb % 3 == 0 ))
+  then
+    echo "Fizz"
+  elif (( numb % 5 == 0 ))
+  then
+    echo "Buzz"
+  else
+    echo "$numb"
+  fi
+done
