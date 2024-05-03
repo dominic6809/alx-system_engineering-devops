@@ -3,12 +3,14 @@
 
 count=0
 
-while [ $count -lt 10 ]
-do
-  if [ $count -eq 9 ]
-  then
-    echo "Hi"
-  fi
-  echo "Best School"
-  (( count++ ))
+while [ $count -lt 10 ]; do
+    ((count++))
+
+    # Check for the 9th iteration
+    if [ $count -eq 9 ]; then
+        echo "Best School"
+        echo "Hi"
+    else
+        echo "Best School"
+    fi
 done
