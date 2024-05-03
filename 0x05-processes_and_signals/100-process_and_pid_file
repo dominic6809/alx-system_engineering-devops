@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# Does the following:
+#   Create a file /var/run/myscript.pid containing the script PID.
+#   Displays "To infinity and beyond" indefinitely
+#   Displays "I hate the kill command" upon receiving a SIGTERM
+#   Displays "Y U no love me?!" upon receiving a SIGINT
+#   Deletes the file /var/run/myscript.pid and terminates upon
+#+  receiving a SIGQUIT or SIGTERM.
+
+PRID=$$
+echo "$PRID" > /var/run/holbertonscript.pid
+
+function sigint_handler()
+{
+    echo "Y U no love me?!"
+}
+
+function interrupt_and_abort()
+{
+    echo "I hate the kill command"
+    rm -f /var/run/holbertonscript.pid
+    kill -9 $PRID
+}
+
+trap sigint_handler SIGINT
+trap interrupt_and_abort SIGQUIT SIGTERM
+
+while :
+do
+    echo "To infinity and beyond"
+    sleep 2
+done
