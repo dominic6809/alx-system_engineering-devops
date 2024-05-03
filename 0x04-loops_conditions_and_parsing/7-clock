@@ -7,10 +7,8 @@ minutes=1
 # Loop until 12 hours and 59 minutes are displayed
 while [ $hours -le 12 ]; do
     while [ $minutes -le 59 ]; do
-        # Display time in 12-hour format
         printf "%02d:%02d\n" $hours $minutes
         
-        # Increment minutes
         ((minutes++))
 
         # Limit the number of lines to 70
@@ -22,7 +20,4 @@ while [ $hours -le 12 ]; do
     # Reset minutes and increment hours
     minutes=0
     ((hours++))
-done | head -n 70
-
-# Ensure script passes shellcheck
-shellcheck 7-clock
+done | head -n 70 | tr -d '\r'
