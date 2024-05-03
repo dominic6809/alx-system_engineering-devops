@@ -8,7 +8,7 @@ minutes=1
 while [ $hours -le 12 ]; do
     while [ $minutes -le 59 ]; do
         printf "%02d:%02d\n" $hours $minutes
-        
+
         ((minutes++))
 
         # Limit the number of lines to 70
