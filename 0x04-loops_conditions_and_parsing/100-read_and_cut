@@ -1,15 +1,6 @@
 #!/usr/bin/env bash
-# script that displays username, user id and home directory for eac line of /etc/paswwd
+# Displays the contents of the file `/etc/passwd`
 
-passwd_file="/etc/passwd"
-
-if [ -e "$passwd_file" ]; then
-  while IFS=: read -r username _ uid _ _ home _; do
-    echo "Username: $username"
-    echo "User ID: $uid"
-    echo "Home Directory: $home"
-    echo
-  done < "$passwd_file"
-else
-  echo "Error: /etc/passwd file does not exist."
-fi
+while read -r passwd; do
+  echo "$passwd" | cut -d ':' -f1,3,6
+done < "/etc/passwd"
