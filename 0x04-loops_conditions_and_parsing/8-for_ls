@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 # Displays the contents of the current directory in list format.
+#   Only displays the part of the name after the first dash
 
 for file in *; do
-    if [[ ! "$file" == .* && "$file" == *-* ]]; then
-        name_after_dash=$(echo "$file" | cut -d '-' -f 2-)
-        echo "$name_after_dash"
-    fi
+  if [ -f "$file" ] && [[ "$file" != .* ]]; then
+    name=$(echo "$file" | cut -d '-' -f 2-)
+    echo "$name"
+  fi
 done
