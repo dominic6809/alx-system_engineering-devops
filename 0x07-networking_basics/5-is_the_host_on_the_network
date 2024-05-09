@@ -11,4 +11,4 @@ ip_address=$1
 
 # Ping the IP address 5 times
 echo "Pinging $ip_address..."
-ping -c 5 $ip_address
+ping -c 5 "$ip_address"
