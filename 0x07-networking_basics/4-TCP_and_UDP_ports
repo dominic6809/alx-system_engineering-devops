@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 # Display listening ports and corresponding PID and program name
-netstat -lp
+
+sudo nestat -l --program
