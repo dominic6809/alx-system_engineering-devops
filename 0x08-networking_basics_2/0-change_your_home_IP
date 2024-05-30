@@ -1,17 +1,8 @@
 #!/usr/bin/env bash
-# Configure an Ubuntu server
-
-# Check if the script is running inside Docker
-if [ ! -f "/.dockerenv" ]; then
-    echo "Error: This script should be run inside Docker."
-    exit 1
-fi
-
-# Check if the script is running on Ubuntu
-if [ "$(cmd /etc/os-release | grep ^NAME= | awk -F\" '{print $2}')" != "Ubuntu" ]; then
-    echo "Error: This script should be run on Ubuntu."
-    exit 1
-fi
+# Bash script that configures an Ubuntu server with the below requirements
+# Requirements:
+#    localhost resolves to 127.0.0.2
+#    facebook.com resolves to 8.8.8.8.
 
 cp /etc/hosts ~/hosts.new
 sed -i 's/^127.*localhost$/127.0.0.2 localhost/' ~/hosts.new
