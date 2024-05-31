@@ -52,9 +52,9 @@ Role: Manages and stores the data needed by the application.
 
 ## Single Points of Failure (SPOF):
 
-### Load Balancer: If the load balancer fails, no traffic can reach the web servers.
+ Load Balancer: If the load balancer fails, no traffic can reach the web servers.
 
-### Database: If the single MySQL server fails, the application cannot access its data.
+ Database: If the single MySQL server fails, the application cannot access its data.
 
 ## Security Issues:
 
