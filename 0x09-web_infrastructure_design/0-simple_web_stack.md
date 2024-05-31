@@ -36,28 +36,6 @@ Protocol: The server communicates with the user's computer over the internet usi
 
 ## Specifics and Issues
 
-### Type of DNS Record
-  www in www.foobar.com:
-Type: Commonly a CNAME or A record.
-
-Purpose: Maps the subdomain www to the server's IP address (8.8.8.8).
-
-### Role of the Web Server
-
-Definition: Manages HTTP requests, serves static content, and forwards dynamic requests to the application server.
-
-### Role of the Application Server
-
-Definition: Processes business logic, handles dynamic content, and interacts with the database to generate responses.
-
-### Role of the Database
-
-Definition: Stores and manages data, processes queries from the application server to retrieve or update information.
-
-### Communication with User's Computer
-
-Protocol: Uses HTTP/HTTPS to communicate over the internet.
-
 # Issues with This Infrastructure
 ## Single Point of Failure (SPOF):
 
