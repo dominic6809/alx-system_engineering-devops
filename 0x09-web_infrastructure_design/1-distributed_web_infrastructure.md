@@ -12,17 +12,11 @@ Round Robin: This algorithm cycles through the available servers in order, distr
 
 ### Servers:
 
- - #### Server 1 & Server 2:
-
-  - Role: Each server runs Nginx as the web server and hosts the application server and application files (code base). They handle incoming web traffic and process application logic.
-
- - #### Server 3:
-
-Role: Runs MySQL as the database server. It stores and manages the application's data.
+  - Role: Each server runs Nginx as the web server, hosts the application server, Runs MySQL as the database server and application files (code base). They handle incoming web traffic and process application logic.
 
 ### Application Files (Code Base):
 
-Role: These files contain the website's code, which includes HTML, CSS, JavaScript, and server-side scripts. They are deployed on Server 1 and Server 2.
+Role: These files contain the website's code, which includes HTML, CSS, JavaScript, and server-side scripts. They are deployed on Servers.
 
 ### Database (MySQL):
 
@@ -32,7 +26,7 @@ Role: Manages and stores the data needed by the application.
 
 ### Load Balancer Configuration:
 
- - Distribution Algorithm: The load balancer is configured with a Round Robin algorithm. This ensures that incoming requests are distributed evenly across Server 1 and Server 2, preventing any single server from becoming overloaded.
+ - Distribution Algorithm: The load balancer is configured with a Round Robin algorithm. This ensures that incoming requests are distributed evenly across the servers, preventing any single server from becoming overloaded.
 
 ### Active-Active vs. Active-Passive Setup:
 
