@@ -1,4 +1,5 @@
-# This Puppet manifest ensures that Flask version 2.1.0 is installed using pip3.
+# This Puppet manifest ensures that Flask version 
+# 2.1.0 is installed using pip3.
 
 package { 'python3-pip':
   ensure => installed,
