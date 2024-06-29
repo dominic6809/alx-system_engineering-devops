@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+# Define the key name and passphrase
+KEY_NAME="school"
+PASSPHRASE="betty"
+
+# Generate the RSA key pair with 4096 bits, using the specified passphrase
+ssh-keygen -t rsa -b 4096 -f ~/.ssh/$KEY_NAME -N $PASSPHRASE
