@@ -1,3 +1,4 @@
+#!usr/bin/pup
 # This Puppet manifest ensures that Flask version 
 # 2.1.0 is installed using pip3.
 
