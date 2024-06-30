@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# using puppet to make changes to config file
+
+# using puppet code to make changes to config file
 
 file { '/etc/ssh/ssh_config':
 	ensure => present,
