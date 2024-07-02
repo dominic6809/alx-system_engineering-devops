@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+# Function to display usage information
+usage() {
+    echo "Usage: $0 PATH_TO_FILE IP USERNAME PATH_TO_SSH_KEY"
+}
+
+# Check if less than 4 parameters are passed
+if [ "$#" -ne 4 ]; then
+    usage
+    exit 1
+fi
+
+# Assign parameters to variables
+FILE_PATH=$1
+SERVER_IP=$2
+USERNAME=$3
+SSH_KEY_PATH=$4
+
+# Use scp to transfer the file to the user's home directory on the server
+scp -o StrictHostKeyChecking=no -i "$SSH_KEY_PATH" "$FILE_PATH" "$USERNAME@$SERVER_IP:~/"
+
+# Exit with status of scp command
+exit $?
