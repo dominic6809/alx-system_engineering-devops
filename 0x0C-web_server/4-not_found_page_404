@@ -7,4 +7,6 @@ sudo ufw allow 'Nginx HTTP'
 touch /var/www/html/custom_404.html
 echo -e "Ceci n'est pas une page\n" > /var/www/html/custom_404.html
 sudo sed -i '/^}/ i\\terror_page 404 /custom_404.html;\n\tlocation = /custom_404.html {\n\t\troot /var/www/html;\n\t\tinternal;\n\t}' /etc/nginx/sites-enabled/default
+
+# Restart Nginx to apply the changes
 sudo service nginx restart
