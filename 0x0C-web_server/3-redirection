@@ -1,34 +1,12 @@
 #!/usr/bin/env bash
 
-# Create a backup of the default Nginx configuration file
-sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default.bak
+# This script installs the NGINX web server on my local server
 
-# Configure Nginx to redirect /redirect_me
-sudo tee /etc/nginx/sites-available/default > /dev/null <<EOL
-server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
+sudo apt-get update
+sudo apt-get -y install nginx
+sudo ufw allow 'Nginx HTTP'
+sudo echo "Hello World!" | sudo tee /var/www/html/index.html
+sudo sed -i '/listen 80 default_server/a rewrite ^/redirect_me https://www.youtube.com/ permanent;' /etc/nginx/sites-available/default
 
-    root /var/www/html;
-    index index.html index.htm index.nginx-debian.html;
-
-    server_name _;
-
-    location / {
-        try_files \$uri \$uri/ =404;
-    }
-
-    location /redirect_me {
-        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
-    }
-}
-EOL
-
-# Test the Nginx configuration
-sudo nginx -t
-
-# Restart Nginx to apply the changes
-sudo systemctl restart nginx
-
-# Ensure Nginx starts on boot
-sudo systemctl enable nginx
+# restart ngix
+sudo service nginx restart
