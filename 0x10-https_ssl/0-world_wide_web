@@ -1,34 +1,15 @@
 #!/usr/bin/env bash
-
-# Function to display subdomain information
-display_subdomain_info() {
-    local domain=$1
-    local subdomain=$2
-    
-    # Get the DNS record type and destination using dig command
-    record=$(dig +short "${subdomain}.${domain}")
-    record_type="A" # Assuming A record, update logic if needed
-
-    # Output the result
-    echo "The subdomain ${subdomain}.${domain} is a ${record_type} record and points to ${record}"
-}
-
-# Check if domain argument is provided
-if [ -z "$1" ]; then
-    echo "Usage: $0 <domain> [subdomain]"
-    exit 1
-fi
-
-# Variables
-domain=$1
-subdomain=$2
-
+# script that display information about subdomains. Arguments = domain: type=> string, what=> domain name to audit, mandatory=> yes. Subdomain = type=> string, what=> specific subdomain to audit, mandatory => no. Output: The subdomain [SUB_DOMAIN] is a [RECORD_TYPE] record and points to [DESTINATION]
 # If subdomain is provided, display information for the specified subdomain
-if [ -n "$subdomain" ]; then
-    display_subdomain_info "$domain" "$subdomain"
-else
-    # Display information for default subdomains
-    for sub in www lb-01 web-01 web-02; do
-        display_subdomain_info "$domain" "$sub"
-    done
+
+if [ "$#" -eq 1 ];
+then
+	subdomain=("www" "lb-01" "web-01" "web-02")
+	for i in "${subdomain[@]}"
+	do
+		dig "$i"."$1"| grep -A1 'ANSWER SECTION:' | awk 'NR==2{SUB=$1; REC=$4; DEST=$5; split(SUB, subx, "."); print "The subdomain " subx[1] " is a " REC " record and points to " DEST}';
+	done
+elif [ "$#" -eq 2 ];
+then
+	dig "$2"."$1" | grep -A1 'ANSWER SECTION:' | awk 'NR==2{SUB=$1; REC=$4; DEST=$5; split(SUB, subx, "."); print "The subdomain " subx[1] " is a " REC " record and points to " DEST}';
 fi
