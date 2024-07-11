@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# Function to display subdomain information
+display_subdomain_info() {
+    local domain=$1
+    local subdomain=$2
+    
+    # Get the DNS record type and destination using dig command
+    record=$(dig +short "${subdomain}.${domain}")
+    record_type="A" # Assuming A record, update logic if needed
+
+    # Output the result
+    echo "The subdomain ${subdomain}.${domain} is a ${record_type} record and points to ${record}"
+}
+
+# Check if domain argument is provided
+if [ -z "$1" ]; then
+    echo "Usage: $0 <domain> [subdomain]"
+    exit 1
+fi
+
+# Variables
+domain=$1
+subdomain=$2
+
+# If subdomain is provided, display information for the specified subdomain
+if [ -n "$subdomain" ]; then
+    display_subdomain_info "$domain" "$subdomain"
+else
+    # Display information for default subdomains
+    for sub in www lb-01 web-01 web-02; do
+        display_subdomain_info "$domain" "$sub"
+    done
+fi
