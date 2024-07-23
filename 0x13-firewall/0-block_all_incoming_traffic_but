@@ -1,8 +1,15 @@
-sudo apt-get install ufw
-sudo ufw enable -y
-sudo ufw status
-sudo ufw default deny incoming -y
-sudo ufw default allow outgoing -y
-sudo ufw allow 22/tcp
-sudo ufw allow 443/tcp
-sudo ufw allow 80/tcp
+# Update and install UFW
+sudo apt-get update
+sudo apt-get install -y ufw
+
+# allow outgoing and Deny incoming network traffic
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+
+# allow some ports
+sudo ufw allow 22
+sudo ufw allow 80
+sudo ufw allow 443
+
+# enable Firewall configuration
+sudo ufw enable
