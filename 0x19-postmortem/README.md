@@ -16,13 +16,21 @@ The root cause of the outage was identified as an unexpected spike in database c
 
 ## Timeline
 10:30 AM:Issue detected through automated monitoring alert indicating high response time and increased error rates.
+
 10:35 AM:Engaged the on-call engineer to investigate the issue. Initial assumption was a possible network latency problem.
+
 10:50 AM:Network latency ruled out. Investigation shifted to application layer. Checked application logs for errors.
+
 11:15 AM:Discovered an abnormal increase in database connection attempts. Assumed a possible DDoS attack and initiated DDoS mitigation procedures.
+
 11:45 AM:DDoS mitigation efforts did not improve the situation. Realized the issue was with the application code causing a surge in database connections.
+
 12:00 PM:Incident escalated to the Database and Application teams for further investigation and resolution.
+
 12:15 PM:Identified a code deployment that inadvertently introduced a database connection leak. Rolled back the deployment to a stable version.
+
 12:30 PM:congratsDatabase connections stabilized, and application performance improved. System returned to normal operation.
+
 12:45 PM:Incident officially declared resolved. Post-incident analysis meeting scheduled.
 
 # Root Cause and Resolution
