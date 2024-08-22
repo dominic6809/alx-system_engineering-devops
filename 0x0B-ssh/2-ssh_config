@@ -1,3 +1,0 @@
-Host *
-    PasswordAuthentication no
-    IdentityfyFile ~/.ssh/school
