@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
 # Web servers are the piece of software generating and serving HTML pages
 
-sudo apt-get update
+sudo apt-get update -y
 sudo apt-get install nginx -y
 sudo ufw 'Nginx HTTP'
-sh -C 'echo "Hello World!" > /var/www/html/index.html'
+echo 'Hello World!' | sudo tee /var/www/html/index.html'
 sudo service nginx restart
-sudo service nginx reload
