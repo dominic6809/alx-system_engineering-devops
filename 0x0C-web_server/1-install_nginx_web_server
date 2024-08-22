@@ -4,6 +4,6 @@
 sudo apt-get update
 sudo apt-get install nginx -y
 sudo ufw 'Nginx HTTP'
-sh -C 'echo "Hello World!" > /var/www/html/index.html'
+sh -c 'echo "Hello World!" > /var/www/html/index.html'
 sudo service nginx restart
 sudo service nginx reload
