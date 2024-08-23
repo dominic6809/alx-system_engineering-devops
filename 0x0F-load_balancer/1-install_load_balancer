@@ -6,14 +6,14 @@ sudo apt-get -y install haproxy
 # edit config file
 server_config=\
 "
-frontend  frontend
+frontend  siren
         bind *:80
         mode http
-        default_backend backend
-backend backend
+        default_backend app
+backend app
         balance roundrobin
-        server 247218-web-01 34.229.56.68:80 check
-        server 247218-web-02 3.85.148.99:80 check
+        server 247218-web-01 100.25.160.4:80 check
+        server 247218-web-02 100.25.3.149:80 check
 "
 sudo echo "$server_config" | sudo tee -a /etc/haproxy/haproxy.cfg
 
