@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
+# Debug and fix bugs arising from using docker container
 # get apache running 
 
-echo "ServerName localhost" >> /etc/apache2.conf
-service apache2 start
+sudo apt-get update -y
+sudo apt-get install -y apache2
+sudo /etc/init.d/apache2 start
+echo "Hello Holberton" | sudo tee -a /var/www/html/index.html
+sudo /etc/init.d/apache2 restart
