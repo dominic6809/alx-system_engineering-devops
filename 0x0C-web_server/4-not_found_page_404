@@ -5,9 +5,13 @@ apt-get update -y
 apt-get -y install nginx
 sudo ufw allow 'Nginx HTTP'
 sh -C 'echo "Hello World!" > /var/www/html/index.html'
+
+# modify default Nginx configuration to return "Hello World!" at root URL
 sudo touch /var/www/html/404.html
-echo "Ceci n'est pas une page" > /var/www/html/404.html
-sed -i '/listen 80 default_server/a rewrite ^/redirect_me https://www.youtube.com/ permanent;' /etc/nginx/sites-available/default
+echo "Ceci n'\''est pas une page" > /var/www/html/404.html
+
+# append a youtube page to redirect to using /redirect_me
+sed -i '/listen 80 default_server/a rewrite ^/redirect_me https://www.youtube.com/@dominicmusyoki804 permanent;' /etc/nginx/sites-available/default
 sed -i '/listen 80 default_server/a error_page 404 /404.html' /etc/nginx/sites-available/default
 
 # restart nginx
