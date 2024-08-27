@@ -22,7 +22,8 @@ def fetch_employee_todo_progress(employee_id):
     employee_name = employee['name']
 
     # Fetch employee's TODO list
-    todos_url = f"https://jsonplaceholder.typicode.com/users/{employee_id}/todos"
+    todos_url =
+    f"https://jsonplaceholder.typicode.com/users/{employee_id}/todos"
     todos_response = requests.get(todos_url)
 
     if todos_response.status_code != 200:
@@ -36,11 +37,15 @@ def fetch_employee_todo_progress(employee_id):
     total_tasks = len(todos)
 
     # Print the progress
-    print(f"Employee {employee_name} is done with tasks({len(done_tasks)}/{total_tasks}):")
+    print(
+        f"Employee {employee_name} is done with tasks({len(done_tasks)}/"
+        f"{total_tasks}):"
+    )
 
     # Print the titles of completed tasks
     for task in done_tasks:
         print(f"\t {task['title']}")
+
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
