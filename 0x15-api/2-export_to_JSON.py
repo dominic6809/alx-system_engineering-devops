@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" 
+"""
 Script that returns info about an employee's TODO list progress and exports the data to a JSON file.
 Uses https://jsonplaceholder.typicode.com.
 """
@@ -9,7 +9,7 @@ import requests
 from sys import argv
 
 def get_employee_todos_progress(employee_id):
-    """ 
+    """
     Fetch and display the TODO list progress of an employee. Also, export the data to a JSON file.
 
     Args:
