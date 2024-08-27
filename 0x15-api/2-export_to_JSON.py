@@ -1,32 +1,75 @@
 #!/usr/bin/python3
 """
-script that Exports to-do list information for a given employee ID to JSON format.
+Script that returns info about an employee's TODO list progress
+and exports the data to a JSON file.
+Uses https://jsonplaceholder.typicode.com.
 """
+
 import json
 import requests
-import sys
-import urllib3
+from sys import argv
 
-# Disable SSL certificate verification
-urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
+def get_employee_todos_progress(employee_id):
+    """
+    Fetch and display the TODO list progress of an employee.
+    Also, export the data to a JSON file.
+
+    params:
+        employee_id (int): The ID of the employee.
+
+    Returns:
+        None
+    """
+    try:
+        # Base URL for the API
+        url = "https://jsonplaceholder.typicode.com/"
+
+        # Fetch user information
+        user_response = requests.get(url + f"users/{employee_id}")
+        user_data = user_response.json()
+        employee_name = user_data['username']
+
+        # Fetch employee's TODO list
+        todos_response = requests.get(url + f"todos?userId={employee_id}")
+        todos_list = todos_response.json()
+
+        # Display the progress
+        total_tasks = len(todos_list)
+        completed_tasks = [task for task in todos_list if task['completed']]
+        num_completed_tasks = len(completed_tasks)
+
+        print(f"Employee {employee_name} is done with tasks("
+              f"{num_completed_tasks}/{total_tasks}):")
+
+        for task in completed_tasks:
+            print(f"\t {task['title']}")
+
+        # Prepare data for JSON export
+        tasks_data = [{
+            "task": task['title'],
+            "completed": task['completed'],
+            "username": employee_name
+        } for task in todos_list]
+
+        # Create the JSON structure
+        json_data = {str(employee_id): tasks_data}
+
+        # Export to JSON
+        json_filename = f"{employee_id}.json"
+        with open(json_filename, mode='w') as json_file:
+            json.dump(json_data, json_file, indent=4)
+        print(f"Data exported to {json_filename}")
+
+    except Exception as e:
+        # Handle any errors that occur during the API requests
+        print(f"An error occurred: {e}")
+
 
 if __name__ == "__main__":
-    user_id = sys.argv[1]
-    url = "https://jsonplaceholder.typicode.com/"
-    user = requests.get(url + "users/{}".format(user_id), verify=False).json()
-    username = user.get("username")
-    todos = requests.get(url + "todos", params={
-       "userId": user_id}, verify=False).json()
-
-    tasks = []
-    for t in todos:
-        task = {}
-        task["task"] = t.get("title")
-        task["completed"] = t.get("completed")
-        task["username"] = username
-        tasks.append(task)
-
-    data = {user_id: tasks}
-
-    with open("{}.json".format(user_id), "w") as jsonfile:
-        json.dump(data, jsonfile, indent=4)
+    # Ensure the script is called with the correct number of arguments
+    if len(argv) != 2:
+        print("Usage: python3 script.py <employee_id>")
+    else:
+        # Pass the employee ID to the function
+        get_employee_todos_progress(int(argv[1]))
