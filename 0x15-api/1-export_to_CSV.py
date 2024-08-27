@@ -5,8 +5,8 @@ and exports the data to a CSV file.
 Uses https://jsonplaceholder.typicode.com.
 """
 
-import requests
 import csv
+import requests
 from sys import argv
 
 
