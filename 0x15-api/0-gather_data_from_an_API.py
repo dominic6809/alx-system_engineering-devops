@@ -7,6 +7,7 @@ Using https://jsonplaceholder.typicode.com
 import requests
 import sys
 
+
 def fetch_employee_todo_progress(employee_id):
     # Fetch employee information
     employee_url = f"https://jsonplaceholder.typicode.com/users/{employee_id}"
